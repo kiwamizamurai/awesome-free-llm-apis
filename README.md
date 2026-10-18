@@ -106,6 +106,21 @@ Base URL: `https://api.mistral.ai/v1`
 | Ministral 3 3B            | 256K    | —          | Text + Vision       | ~1 RPS, 500K TPM |
 | Ministral 3 14B           | 256K    | —          | Text + Vision       | ~1 RPS, 500K TPM |
 
+### [Sarashina (SB Intuitions)](https://chat.sarashina.ai/dashboard/api-keys) 🇯🇵
+
+Free beta, no credit card required. Google account login. Six Japanese-focused models for chat, moderation, embeddings, reranking and JA-EN translation. [^8]
+
+Base URL: `https://api.sarashina.ai/v1`
+
+| Model Name           | Context  | Max Output | Modality                | Rate Limit |
+| -------------------- | -------- | ---------- | ----------------------- | ---------- |
+| Sarashina3 mini      | 128K     | 8K         | Text + Tools            | 6 RPM      |
+| Sarashina3 nano      | 128K     | 8K         | Text                    | 60 RPM     |
+| Sarashina3 guard     | 64K      | 8K         | Text (moderation)       | 6 RPM      |
+| Sarashina3 embedding | 8K       | —          | Embeddings (1,536 dims) | 60 RPM     |
+| Sarashina3 rerank    | 8K       | —          | Text (rerank)           | 60 RPM     |
+| Sarashina3 translate | 5K chars | —          | Text (translation)      | 6 RPM      |
+
 ### [Z AI (Zhipu AI)](https://open.bigmodel.cn/usercenter/apikeys) 🇨🇳
 
 Permanent free models, no credit card required. [^12]
@@ -329,6 +344,7 @@ Know a free tier that's missing? [Open a PR](contributing.md). Include the provi
 [^5]: Kilo Code's free pool changes frequently, and the /api/gateway/models catalog can lag what is actually served: probe results have confirmed models absent from the catalog still answering. Rows through liquid/lfm-2.5-2.6b:free answered a live request between 2026-08-19 and 2026-08-21; the rows after it were added on 2026-10-05 from the catalog, where they are priced at $0, and have not been probed. Free models are reachable with no API key, at 200 requests per hour per IP ([authentication](https://kilo.ai/docs/gateway/authentication)). The kilo-auto/free router picks a model from the free pool, and Kilo's docs warn it "may route your requests to providers that log prompts and outputs". The NVIDIA free endpoints carry NVIDIA's own condition, quoted on Kilo's [models page](https://kilo.ai/docs/gateway/models-and-providers): "Trial use only - do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services."
 [^6]: API-Inference is free for registered users. Current published limits are 2,000 requests/day per user (total across models), with per-model daily quotas dynamically adjusted and capped at 500; concurrency is also dynamically rate-limited. Requires Alibaba Cloud account binding and real-name verification ([limits](https://modelscope.cn/docs/model-service/API-Inference/limits), [intro](https://modelscope.cn/docs/model-service/API-Inference/intro)).
 [^7]: OVHcloud AI Endpoints offers a permanent free anonymous tier (2 requests per minute per IP, per model) with no signup or API key required. Higher rate limits (400 RPM per Public Cloud project per model) require an API key and are billed pay-as-you-go per token; new Public Cloud accounts get up to $200 in free trial credits. Models are hosted in EU data centers.
+[^8]: Sarashina API is a free beta that SB Intuitions launched on October 13, 2026, with no announced end date, so the free tier is not guaranteed to be permanent ([press release](https://www.sbintuitions.co.jp/en/news/press/20261013_01/)). Rate limits apply per contract holder and per model, are counted over a 60-second window, and don't allow bursting; 429 responses carry `Retry-After` ([rate limits](https://docs.sarashina.ai/rate-limits)). `sarashina3-guard` doesn't generate text: it returns `安全` or `有害` plus T1-T12 category codes ([guard](https://docs.sarashina.ai/api-reference/chat-completions)). Chat Completions is OpenAI SDK-compatible, but OpenAI parameters outside the documented set are rejected with a 400 rather than ignored. Embeddings and Rerank use their own request bodies, and Translate is a separate `POST /v1/translate` endpoint that takes one text of up to 5,000 characters per request and ignores `model` ([translate](https://docs.sarashina.ai/api-reference/translate)). Free-beta inputs and outputs may be used to improve SB Intuitions' models ([service page](https://sarashina.ai)).
 [^9]: SiliconFlow requires real-name identity verification to use free models (effective May 15, 2026, per the [release notes](https://api-docs.siliconflow.cn/docs/release-notes/overview)). Verification supports mainland-Chinese documents; international users must contact support.
 [^10]: LLM7.io rotates its catalog frequently, so the model list changes between checks. Access is tier-based, not token-based: `turbo` models are reachable anonymously or with a free token, `pro` models need the paid plan ([models API](https://docs.llm7.io/guides/models-api)). A free token is capped at 1 RPS, 60 RPM, 250 requests per hour and 100,000 tokens per 24 hours, and the free quota may be reduced without notice ([limits](https://docs.llm7.io/limits)). A paid Pro plan is available at $12/month. The docs no longer list anonymous (no-key) limits; anonymous access was last confirmed by live request on 2026-08-21.
 [^11]: The 10,000 free Neurons are shared across all Workers AI usage, not per model, and all limits reset daily at 00:00 UTC. Going over does not bill you, the request fails. Seven models are excluded from Workers Free billing and need the Workers Paid plan or prepaid AI Gateway credits: `@cf/moonshotai/kimi-k2.6`, `@cf/moonshotai/kimi-k2.7-code`, `@cf/zai-org/glm-5.2`, `@cf/zai-org/glm-5.3`, `@cf/zai-org/glm-5.3-flash`, `@cf/deepseek-ai/deepseek-v4-flash-0731`, `@cf/deepseek-ai/deepseek-v4-pro-0813` ([pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/)).

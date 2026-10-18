@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-05",
+  "lastUpdated": "2026-10-19",
   "providers": [
     {
       "name": "Aion Labs",
@@ -310,6 +310,66 @@
           "maxOutput": "—",
           "modality": "Text + Vision",
           "rateLimit": "~1 RPS, 500K TPM"
+        }
+      ]
+    },
+    {
+      "name": "Sarashina (SB Intuitions)",
+      "category": "provider_api",
+      "country": "JP",
+      "flag": "🇯🇵",
+      "url": "https://chat.sarashina.ai/dashboard/api-keys",
+      "baseUrl": "https://api.sarashina.ai/v1",
+      "description": "Free beta, no credit card required. Google account login. Six Japanese-focused models for chat, moderation, embeddings, reranking and JA-EN translation.",
+      "footnoteRef": 8,
+      "models": [
+        {
+          "id": "sarashina3-mini",
+          "name": "Sarashina3 mini",
+          "context": "128K",
+          "maxOutput": "8K",
+          "modality": "Text + Tools",
+          "rateLimit": "6 RPM"
+        },
+        {
+          "id": "sarashina3-nano",
+          "name": "Sarashina3 nano",
+          "context": "128K",
+          "maxOutput": "8K",
+          "modality": "Text",
+          "rateLimit": "60 RPM"
+        },
+        {
+          "id": "sarashina3-guard",
+          "name": "Sarashina3 guard",
+          "context": "64K",
+          "maxOutput": "8K",
+          "modality": "Text (moderation)",
+          "rateLimit": "6 RPM"
+        },
+        {
+          "id": "sarashina3-embedding",
+          "name": "Sarashina3 embedding",
+          "context": "8K",
+          "maxOutput": "—",
+          "modality": "Embeddings (1,536 dims)",
+          "rateLimit": "60 RPM"
+        },
+        {
+          "id": "sarashina3-rerank",
+          "name": "Sarashina3 rerank",
+          "context": "8K",
+          "maxOutput": "—",
+          "modality": "Text (rerank)",
+          "rateLimit": "60 RPM"
+        },
+        {
+          "id": "sarashina3-translate",
+          "name": "Sarashina3 translate",
+          "context": "5K chars",
+          "maxOutput": "—",
+          "modality": "Text (translation)",
+          "rateLimit": "6 RPM"
         }
       ]
     },
@@ -1206,6 +1266,10 @@
     {
       "id": 7,
       "text": "OVHcloud AI Endpoints offers a permanent free anonymous tier (2 requests per minute per IP, per model) with no signup or API key required. Higher rate limits (400 RPM per Public Cloud project per model) require an API key and are billed pay-as-you-go per token; new Public Cloud accounts get up to $200 in free trial credits. Models are hosted in EU data centers."
+    },
+    {
+      "id": 8,
+      "text": "Sarashina API is a free beta that SB Intuitions launched on October 13, 2026, with no announced end date, so the free tier is not guaranteed to be permanent ([press release](https://www.sbintuitions.co.jp/en/news/press/20261013_01/)). Rate limits apply per contract holder and per model, are counted over a 60-second window, and don't allow bursting; 429 responses carry `Retry-After` ([rate limits](https://docs.sarashina.ai/rate-limits)). `sarashina3-guard` doesn't generate text: it returns `安全` or `有害` plus T1-T12 category codes ([guard](https://docs.sarashina.ai/api-reference/chat-completions)). Chat Completions is OpenAI SDK-compatible, but OpenAI parameters outside the documented set are rejected with a 400 rather than ignored. Embeddings and Rerank use their own request bodies, and Translate is a separate `POST /v1/translate` endpoint that takes one text of up to 5,000 characters per request and ignores `model` ([translate](https://docs.sarashina.ai/api-reference/translate)). Free-beta inputs and outputs may be used to improve SB Intuitions' models ([service page](https://sarashina.ai))."
     },
     {
       "id": 9,

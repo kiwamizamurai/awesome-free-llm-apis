@@ -20,11 +20,12 @@ Ask the user what matters most, then recommend accordingly:
 | Highest token budget | Mistral AI (1B tokens/month) |
 | European provider | Mistral AI (EU), LLM7.io (UK) |
 | No signup required | LLM7.io (basic tier works without token) |
+| Japanese-language work | Sarashina (free beta, JP) |
 
 ### Provider categories
 
 **Provider APIs** -- run by the companies that train the models:
-- Google Gemini, Cohere, Mistral AI, Zhipu AI
+- Google Gemini, Cohere, Mistral AI, Zhipu AI, Sarashina (free beta)
 - See [references/provider-apis.md](references/provider-apis.md) for setup instructions.
 
 **Inference providers** -- third-party platforms hosting open-weight models:
